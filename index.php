@@ -1,3 +1,15 @@
+<?php
+require "connect.php";
+require "review.class.php";
+
+$reviews = array();
+$result = mysqli_query($link, "SELECT * FROM reviews ORDER BY id DESC");
+
+while($row = mysqli_fetch_assoc($result))
+{
+    $reviews[] = new Review($row);
+}
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -28,6 +40,11 @@
             </div>
         </form>
     </div>
+    <?php
+    foreach($reviews as $c){
+        echo $c->markup();
+    }
+    ?>
 </div>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
